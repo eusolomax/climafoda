@@ -21,9 +21,57 @@ body::before {
     z-index: -1;
 }
 
+.input-search-div {
+    height: 32px;
+    width: 300px;
+}
+
+.input-search-div input {
+    width: 300px;
+    height: 36px;
+    border: none;
+    
+    border-radius: 0 0 20px;
+    font-size: 20px;
+    padding-left: 27px;
+
+    background-color: rgba(0, 0, 0, 0.603);
+    border-left: 3px solid rgb(255 255 255 / 2%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.068);
+    border-right: 1px solid rgba(255, 255, 255, 0.055);
+    
+    outline: none;
+    color: white;
+}
+
+.input-search-div input::placeholder {
+    color: rgba(255, 255, 255, 0.753);
+}
+
+.input-search-icon-div {
+    overflow: visible;
+    box-sizing: content-box;
+    padding: 7px 0 0 0;
+    position: fixed;
+    color: #ffffff6e;
+    padding-left: 8px;
+}
+
+.content-flex-div {
+    display: flex;
+    width: 100vw;
+    height: 94vh;
+    justify-content: center;
+    align-items: center;
+}
+
 .content-div {
+    width: 100vw;
+    height: 100vh;
     display: flex;
     position: absolute;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .principal-card {
@@ -31,7 +79,7 @@ body::before {
     width: 500px;
     height: 320px;
     -webkit-backdrop-filter: blur(15px);
-    backdrop-filter: blur(3px);
+    backdrop-filter: blur(2px);
     background: linear-gradient(280deg, rgb(0 0 0 / 19%) 0%, rgb(0 0 0 / 3%) 76%);
     border-top: 2px solid rgb(255 255 255 / 8%);
     border-left: 3px solid rgb(255 255 255 / 2%);
@@ -41,11 +89,12 @@ body::before {
     border-radius: 35px;
     flex-direction: column;
     transition-duration: 300ms;
+    margin-bottom: 50px;
 }
 
 .principal-card:hover {
     -webkit-backdrop-filter: blur(15px);
-    backdrop-filter: blur(4px);
+    backdrop-filter: blur(3px);
     transition-duration: 300ms;
 }
 
@@ -124,6 +173,28 @@ body::before {
     0 0 24px #ffffff1c;
     
     color: rgb(247, 247, 247);
+    animation: principal-light 1s infinite;
+    cursor: default;
+}
+
+@keyframes principal-light {
+    0% {
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.322),
+        0 0 20px #ffffff34,
+        0 0 24px #ffffff1c;
+    }
+
+    50% {
+        text-shadow: 0 0 13px rgba(255, 255, 255, 0.322),
+        0 0 23px #ffffff34,
+        0 0 27px #ffffff1c;
+    }
+
+    100% {
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.322),
+        0 0 20px #ffffff34,
+        0 0 24px #ffffff1c;
+    }
 }
 
 .content-principal-MaxMin {
@@ -135,6 +206,7 @@ body::before {
     height: 28px;
     padding: 0px 8px 0 0;
     justify-content: space-evenly;
+    cursor: default;
 }
 
 .content-principal-MaxMin fa-icon {
@@ -178,6 +250,7 @@ body::before {
     justify-content: space-around;
     padding-bottom: 10px;
     font-size: 20px;
+    cursor: default;
 }
 
 .content-secundary span {
@@ -192,4 +265,14 @@ body::before {
 .content-secundary-first-p {
     color: rgba(255, 255, 255, 0.822) !important;
     text-shadow: none !important;
+}
+
+.api-desc-div {
+    font-size: 15px;
+    font-weight: 100;
+    color: rgba(255, 255, 255, 0.308);
+    text-align: end;
+    padding-right: 10px;
+    padding-bottom: 4px;
+    cursor: default;
 }

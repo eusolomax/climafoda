@@ -12,4 +12,5 @@ export class AppComponent {
   faCloud = fontawesome.faCloud
   faArrowUp = fontawesome.faArrowUp
   faArrowDown = fontawesome.faArrowDown
+  faMagnifyingGlass = fontawesome.faMagnifyingGlass
 }

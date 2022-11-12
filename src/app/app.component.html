@@ -1,25 +1,39 @@
 <body>
   <div class="content-div">
-    <div class="principal-card">
-      <div class="card-header">
-        <fa-icon [icon]="faCloudMoonRain" class="icons"></fa-icon>
-        <p class="location-title">São Paulo, BR.</p>
-      </div>
-      <div class="content">
-        <div class="content-principal">
-          <h1>24º</h1>
-          <div class="content-principal-MaxMin">
-            <fa-icon [icon]="faArrowUp"></fa-icon>
-            <p>27º</p>/
-            <p>21º</p>
-            <fa-icon [icon]="faArrowDown"></fa-icon>
+    <div class="input-search-icon-div">
+      <fa-icon [icon]="faMagnifyingGlass"></fa-icon>
+    </div>
+
+    <div class="input-search-div">
+      <input type="text" placeholder="Digite sua cidade..." spellcheck="false">
+    </div>
+
+    <div class="content-flex-div">
+      <div class="principal-card">
+        <div class="card-header">
+          <fa-icon [icon]="faCloudMoonRain" class="icons"></fa-icon>
+          <p class="location-title">São Paulo, BR.</p>
+        </div>
+        <div class="content">
+          <div class="content-principal">
+            <h1>24º</h1>
+            <div class="content-principal-MaxMin">
+              <fa-icon [icon]="faArrowUp"></fa-icon>
+              <p>27º</p>/
+              <p>21º</p>
+              <fa-icon [icon]="faArrowDown"></fa-icon>
+            </div>
+          </div>
+          <div class="content-secundary">
+            <p class="content-secundary-first-p">Umidade: <span><p>42%</p></span></p>
+            <p class="content-secundary-first-p">Sensação: <span><p>21º</p></span></p>
           </div>
         </div>
-        <div class="content-secundary">
-          <p class="content-secundary-first-p">Umidade: <span><p>42%</p></span></p>
-          <p class="content-secundary-first-p">Sensação: <span><p>21º</p></span></p>
-        </div>
       </div>
+    </div>
+
+    <div class="api-desc-div">
+      <p>© 2012 — 2022 OpenWeather API ®</p>
     </div>
   </div>
 </body>
