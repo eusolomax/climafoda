@@ -13,13 +13,46 @@ body::before {
     width: 100vw;
     height: 100vh;
     background-color: black;
-    background-image: url('../assets/background-images/cloudy-night.jpg');
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
     z-index: -1;
 }
+
+.dayClear::before {
+    background-image: url('../assets/background-images/clearsky-day.jpg');
+}
+
+.nightClear::before {
+    background-image: url('../assets/background-images/clearsky-night.jpg');
+}
+
+.dayCloudy::before {
+    background-image: url('../assets/background-images/cloudy-day.jpg');
+}
+
+.nightCloudy::before {
+    background-image: url('../assets/background-images/cloudy-night.jpg');
+}
+
+.dayRain::before {
+    background-image: url('../assets/background-images/rain-day.jpg');
+}
+
+.nightRain::before {
+    background-image: url('../assets/background-images/rain-night.jpg');
+}
+
+.dayThunderstorm::before {
+    background-image: url('../assets/background-images/thunderstorm-day.jpg');
+}
+
+.nightThunderstorm::before {
+    background-image: url('../assets/background-images/thunderstorm-night.jpg');
+}
+
+
 
 .input-search-div {
     height: 32px;
@@ -275,4 +308,35 @@ body::before {
     padding-right: 10px;
     padding-bottom: 4px;
     cursor: default;
+}
+
+.errorText {
+    animation: errorTextanimation 1s;
+}
+
+@keyframes errorTextanimation {
+    0% {
+        color: rgb(255, 81, 81);
+        padding-left: 26px;
+    }
+
+    10% {
+        padding-left: 28px;
+    }
+
+    20% {
+        padding-left: 26px;
+    }
+
+    30% {
+        padding-left: 28px;
+    }
+
+    50% {
+        padding-left: 27px;
+    }
+
+    100% {
+        color: white;
+    }
 }
