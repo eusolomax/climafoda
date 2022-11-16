@@ -9,9 +9,17 @@ import { HttpClient } from '@angular/common/http'
 })
 export class AppComponent implements OnInit {
   icons = {
+    faSun: fontawesome.faSun,
+    faCloudSun: fontawesome.faCloudSun,
+    faCloudSunRain: fontawesome.faCloudSunRain,
+
+    faMoon: fontawesome.faMoon,
     faCloudMoon: fontawesome.faCloudMoon,
     faCloudMoonRain: fontawesome.faCloudMoonRain,
-    faCloud: fontawesome.faCloud,
+    faThunderstorm: fontawesome.faThunderstorm,
+
+    faDefault: fontawesome.faDroplet,
+
     faArrowUp: fontawesome.faArrowUp,
     faArrowDown: fontawesome.faArrowDown,
     faMagnifyingGlass: fontawesome.faMagnifyingGlass
@@ -23,6 +31,10 @@ export class AppComponent implements OnInit {
   clear: boolean = false
   rain: boolean = false
   thunderstorm: boolean = false
+  mist: boolean = false
+  haze: boolean = false
+
+  iconValue: any = this.icons.faDefault
 
   constructor(private http: HttpClient){}
 
@@ -39,7 +51,7 @@ export class AppComponent implements OnInit {
 
         this.getWeatherDataGeo(userLat, userLon)
       })
-    } else {alert("Ops! Seu navegador não tem suporte para esta merda.")}
+    } else {alert("Ops! Seu navegador não tem suporte para este recurso. Use o serviço de busca.")}
   }
 
   getWeatherDataGeo(userLat: any, userLon: any){
@@ -65,6 +77,7 @@ export class AppComponent implements OnInit {
     this.weatherData.tempHumidity = (this.weatherData.main.humidity)
 
     this.checkCond(this.weatherData.weatherCond)
+    this.checkIcon()
     
     console.log(data)
     console.info(this.weatherData.isDay, this.weatherData.weatherCond)
@@ -106,9 +119,10 @@ export class AppComponent implements OnInit {
     this.weatherData.tempHumidity = (this.weatherData.main.humidity)
 
     this.checkCond(this.weatherData.weatherCond)
+    this.checkIcon()
 
     console.log(data)
-    console.info(this.weatherData.isDay, this.weatherData.weatherCond)
+    console.info(this.weatherData.weather[0].description)
   }
 
   search($event: any){
@@ -131,13 +145,71 @@ export class AppComponent implements OnInit {
       case "Thunderstorm":
         this.thunderstorm = true
         break
+      case "Mist":
+        this.mist = true
+        break
+      case "Haze":
+        this.haze = true
+      }
+  }
+
+  checkIcon(){
+    if (this.weatherData.isDay == true && this.clear == true) {
+      this.iconValue = this.icons.faSun
+    }
+
+    if (this.weatherData.isDay == true && this.clouds == true) {
+      this.iconValue = this.icons.faCloudSun
+    }
+
+    if (this.weatherData.isDay == true && this.rain == true) {
+      this.iconValue = this.icons.faCloudSunRain
+    }
+
+    if (this.weatherData.isDay == true && this.thunderstorm == true) {
+      this.iconValue = this.icons.faCloudSunRain
+    }
+
+    if (this.weatherData.isDay == true && this.mist == true) {
+      this.iconValue = this.icons.faCloudSun
+    }
+
+    if (this.weatherData.isDay == true && this.haze == true) {
+      this.iconValue = this.icons.faCloudSun
+    }
+
+    if (this.weatherData.isDay == false && this.clear == true) {
+      this.iconValue = this.icons.faMoon
+    }
+
+    if (this.weatherData.isDay == false && this.clouds == true) {
+      this.iconValue = this.icons.faCloudMoon
+    }
+
+    if (this.weatherData.isDay == false && this.rain == true) {
+      this.iconValue = this.icons.faCloudMoonRain
+    }
+
+    if (this.weatherData.isDay == false && this.thunderstorm == true) {
+      this.iconValue = this.icons.faCloudMoonRain
+    }
+
+    if (this.weatherData.isDay == false && this.mist == true) {
+      this.iconValue = this.icons.faCloudMoon
+    }
+
+    if (this.weatherData.isDay == false && this.haze == true) {
+      this.iconValue = this.icons.faCloudMoon
     }
   }
 
   resetCond(){
+    this.iconValue = this.icons.faDefault
     this.clouds = false
     this.clear = false
     this.rain = false
     this.thunderstorm = false
+    this.mist = false
+    this.haze = false
   }
 }

@@ -3,11 +3,13 @@
     'dayCloudy': this.weatherData.isDay == true && this.clouds == true,
     'dayRain': this.weatherData.isDay == true && this.rain == true,
     'dayThunderstorm': this.weatherData.isDay == true && this.thunderstorm == true,
+    'dayMist': this.weatherData.isDay == true && this.mist == true || this.haze == true,
 
     'nightClear': this.weatherData.isDay == false && this.clear == true,
     'nightCloudy': this.weatherData.isDay == false && this.clouds == true,
     'nightRain': this.weatherData.isDay == false && this.rain == true,
-    'nightThunderstorm': this.weatherData.isDay == false && this.thunderstorm == true
+    'nightThunderstorm': this.weatherData.isDay == false && this.thunderstorm == true,
+    'nightMist': this.weatherData.isDay == false && this.mist == true || this.haze == true
   }">
 
   <div class="content-div">
@@ -22,7 +24,7 @@
     <div class="content-flex-div">
       <div class="principal-card">
         <div class="card-header">
-          <fa-icon [icon]="icons.faCloudMoonRain" class="icons"></fa-icon>
+          <fa-icon [icon]="this.iconValue" class="icons"></fa-icon>
           <p class="location-title">{{weatherData.cityName}}, {{weatherData.countryCod}}</p>
         </div>
         <div class="content">

@@ -52,6 +52,14 @@ body::before {
     background-image: url('../assets/background-images/thunderstorm-night.jpg');
 }
 
+.dayMist::before {
+    background-image: url('../assets/background-images/mist-day.jpg');
+}
+
+.nightMist::before {
+    background-image: url('../assets/background-images/mist-night.jpg');
+}
+
 
 
 .input-search-div {
@@ -303,7 +311,7 @@ body::before {
 .api-desc-div {
     font-size: 15px;
     font-weight: 100;
-    color: rgba(255, 255, 255, 0.308);
+    color: rgba(255, 255, 255, 0.185);
     text-align: end;
     padding-right: 10px;
     padding-bottom: 4px;
