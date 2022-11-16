@@ -28,6 +28,9 @@
           <p class="location-title">{{weatherData.cityName}}, {{weatherData.countryCod}}</p>
         </div>
         <div class="content">
+          <div class="desc-div">
+            <p>{{this.weatherData.isDay? 'Dia' : 'Noite'}}, {{this.weatherData.desc}}.</p>
+          </div>
           <div class="content-principal">
             <h1>{{weatherData.temp}}º</h1>
             <div class="content-principal-MaxMin">

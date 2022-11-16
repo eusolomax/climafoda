@@ -61,22 +61,16 @@ body::before {
 }
 
 
-
-.input-search-div {
-    height: 32px;
-    width: 300px;
-}
-
 .input-search-div input {
     width: 300px;
-    height: 36px;
+    height: 38px;
     border: none;
     
     border-radius: 0 0 20px;
     font-size: 20px;
     padding-left: 27px;
 
-    background-color: rgba(0, 0, 0, 0.603);
+    background-color: rgba(0, 0, 0, 0.541);
     border-left: 3px solid rgb(255 255 255 / 2%);
     border-bottom: 1px solid rgba(255, 255, 255, 0.068);
     border-right: 1px solid rgba(255, 255, 255, 0.055);
@@ -92,9 +86,9 @@ body::before {
 .input-search-icon-div {
     overflow: visible;
     box-sizing: content-box;
-    padding: 7px 0 0 0;
+    padding: 8px 0 0 0;
     position: fixed;
-    color: #ffffff6e;
+    color: #ffffff86;
     padding-left: 8px;
 }
 
@@ -161,8 +155,16 @@ body::before {
 }
 
 .icons {
-    padding: 0 12px 0 0;
+    padding: 0 12px 0 2px;
     font-size: 3.17rem;
+    color: rgba(255, 255, 255, 0.897) !important;
+
+    transition-duration: 300ms;
+}
+
+.icons:hover {
+    color: rgb(255, 255, 255) !important;
+    transition-duration: 300ms;
 }
 
 .location-title {
@@ -194,7 +196,7 @@ body::before {
 
 .content-principal {
     width: auto;
-    height: 148px;
+    height: 128px;
     display: flex;
     flex-direction: column;
     padding-left: 13px;
@@ -347,4 +349,24 @@ body::before {
     100% {
         color: white;
     }
+}
+
+.desc-div {
+    width: 100%;
+    height: 30px;
+    color: rgba(255, 255, 255, 0.747);
+    font-size: 18px;
+    padding: 3px 0 0 12px;
+
+    transition-duration: 300ms;
+}
+
+.desc-div:hover {
+    cursor: default;
+    color: rgba(255, 255, 255, 0.884);
+    transition-duration: 300ms;
+}
+
+.desc-div p::first-letter {
+    text-transform: uppercase;
 }

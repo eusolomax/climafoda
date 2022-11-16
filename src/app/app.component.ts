@@ -33,6 +33,7 @@ export class AppComponent implements OnInit {
   thunderstorm: boolean = false
   mist: boolean = false
   haze: boolean = false
+  description: string = "Carregando.."
 
   iconValue: any = this.icons.faDefault
 
@@ -55,7 +56,7 @@ export class AppComponent implements OnInit {
   }
 
   getWeatherDataGeo(userLat: any, userLon: any){
-    this.http.get(`https://api.openweathermap.org/data/2.5/weather?lat=${userLat}&lon=${userLon}&appid=c027ff71441a14766a6b79b9be8c447e`)
+    this.http.get(`https://api.openweathermap.org/data/2.5/weather?lat=${userLat}&lon=${userLon}&appid=c027ff71441a14766a6b79b9be8c447e&lang=pt`)
     .subscribe(
       data => {this.setWeatherDataGeo(data)}
       )
@@ -75,6 +76,7 @@ export class AppComponent implements OnInit {
     this.weatherData.tempMin = (this.weatherData.main.temp_min - fahrenheit).toFixed(0)
     this.weatherData.tempFeelsLike = (this.weatherData.main.feels_like - fahrenheit).toFixed(0)
     this.weatherData.tempHumidity = (this.weatherData.main.humidity)
+    this.weatherData.desc = (this.weatherData.weather[0].description)
 
     this.checkCond(this.weatherData.weatherCond)
     this.checkIcon()
@@ -84,7 +86,7 @@ export class AppComponent implements OnInit {
   }
 
   getWeatherDataLocation(cidade: any){
-    this.http.get(`https://api.openweathermap.org/data/2.5/weather?q=${cidade}&units=metric&appid=c027ff71441a14766a6b79b9be8c447e`)
+    this.http.get(`https://api.openweathermap.org/data/2.5/weather?q=${cidade}&units=metric&appid=c027ff71441a14766a6b79b9be8c447e&lang=pt`)
     .subscribe({
       next: data => {this.setWeatherDataLocation(data)},
 
@@ -117,12 +119,13 @@ export class AppComponent implements OnInit {
     this.weatherData.tempMin = (this.weatherData.main.temp_min).toFixed(0)
     this.weatherData.tempFeelsLike = (this.weatherData.main.feels_like).toFixed(0)
     this.weatherData.tempHumidity = (this.weatherData.main.humidity)
+    this.weatherData.desc = (this.weatherData.weather[0].description)
 
     this.checkCond(this.weatherData.weatherCond)
     this.checkIcon()
 
     console.log(data)
-    console.info(this.weatherData.weather[0].description)
+    console.info(this.weatherData.desc)
   }
 
   search($event: any){
@@ -211,5 +214,6 @@ export class AppComponent implements OnInit {
     this.thunderstorm = false
     this.mist = false
     this.haze = false
+    this.description = "Carregando.."
   }
 }
