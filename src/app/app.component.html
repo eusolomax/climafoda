@@ -1,35 +1,70 @@
-<body [ngClass]="{
-    'dayClear': this.weatherData.isDay == true && this.clear == true,
-    'dayCloudy': this.weatherData.isDay == true && this.clouds == true,
-    'dayRain': this.weatherData.isDay == true && this.rain == true,
-    'dayThunderstorm': this.weatherData.isDay == true && this.thunderstorm == true,
-    'dayMist': this.weatherData.isDay == true && this.mist == true || this.haze == true,
+<div *ngIf="userHasGeo == true" class="modalWarning">
+  <h1>Geolocalização.</h1>
+  <p>Para usar o Climafoda é importante <br> estar com a geolocalização ativa neste site.</p>
+  <div class="lineWarning"></div>
+  <p>Procure <a href="https://www.google.com/search?q=Como ativar a opção de geolocalização em meu navegador?" target="_blank" >como ativar novamente esta opção</a></p>
+  <div class="buttonDiv">
+    <button (click)="userGeoDenied()">Continuar mesmo assim</button>
+  </div>
+</div>
 
-    'nightClear': this.weatherData.isDay == false && this.clear == true,
-    'nightCloudy': this.weatherData.isDay == false && this.clouds == true,
-    'nightRain': this.weatherData.isDay == false && this.rain == true,
-    'nightThunderstorm': this.weatherData.isDay == false && this.thunderstorm == true,
-    'nightMist': this.weatherData.isDay == false && this.mist == true || this.haze == true
+<body [ngClass]="{
+  'dayClear': this.weatherData.isDay == true && this.clear == true,
+  'dayCloudy': this.weatherData.isDay == true && this.clouds == true,
+  'dayRain': this.weatherData.isDay == true && this.rain == true,
+  'dayThunderstorm': this.weatherData.isDay == true && this.thunderstorm == true,
+  'dayMist': this.weatherData.isDay == true && this.mist == true || this.haze == true || this.smoke == true,
+  'daySnow': this.weatherData.isDay == true && this.snow == true,
+
+  'nightClear': this.weatherData.isDay == false && this.clear == true,
+  'nightCloudy': this.weatherData.isDay == false && this.clouds == true,
+  'nightRain': this.weatherData.isDay == false && this.rain == true,
+  'nightThunderstorm': this.weatherData.isDay == false && this.thunderstorm == true,
+  'nightMist': this.weatherData.isDay == false && this.mist == true || this.haze == true || this.smoke == true,
+  'nightSnow': this.weatherData.isDay == false && this.snow == true
   }">
 
   <div class="content-div">
-    <div class="input-search-icon-div">
-      <fa-icon [icon]="icons.faMagnifyingGlass"></fa-icon>
-    </div>
-
     <div class="input-search-div">
-      <input type="text" placeholder="Digite sua cidade..." spellcheck="false" [class]="{'errorText': searchError == true}" (keyup.enter)="search($event)">
-    </div>
+      <div class="input-search-icon-div">
+        <fa-icon [icon]="icons.faMagnifyingGlass"></fa-icon>
+      </div>
 
+      <input #searchInput type="text" placeholder="Digite sua cidade..." spellcheck="false" [class]="{'errorText': searchError == true}" (keyup.enter)="search($event)">
+      
+      <div [ngClass]="{'hamburgerDivOpen': this.hambugerOpened == true}" #hamburgerDiv class="hamburgerDiv">
+        <button (click)="hamburguerOpen()">
+          <fa-icon [icon]="icons.faBars"></fa-icon>
+        </button>
+      </div>
+    </div>
+    
     <div class="content-flex-div">
-      <div class="principal-card">
-        <div class="card-header">
-          <fa-icon [icon]="this.iconValue" class="icons"></fa-icon>
-          <p class="location-title">{{weatherData.cityName}}, {{weatherData.countryCod}}</p>
+
+      <div class="content-div">
+        <div class="menuDiv" *ngIf="this.hambugerOpened">
+          <div class="menuDivtitle">
+            <h1>MENU</h1>
+          </div>
+          <div class="menuContentDiv">
+            <button (click)="goToBookCity()"><p><fa-icon [icon]="icons.faLocationDot"></fa-icon> Ir a minha cidade favoritada</p></button>
+            <button><p><fa-icon [icon]="icons.faBook"></fa-icon> Leia sobre o projeto</p></button>
+            <button><a href="https://www.github.com/eusolomax" target="_blank"><p><fa-icon [icon]="icons.faHeart"></fa-icon> Acesse meu GitHub</p></a></button>
+          </div>
+        </div>
+        
+        
+        <div class="principal-card" *ngIf="!this.hambugerOpened">
+          <div class="card-header">
+          <div class="iconAndLocalDiv">
+            <fa-icon [icon]="this.iconValue" class="icons"></fa-icon>
+            <p class="location-title">{{weatherData.cityName}}, {{weatherData.countryCod}}</p>
+          </div>
+          <button (click)="bookCity()" class="buttonBookmarkIcon"><fa-icon class="bookmarkIcon" [icon]="bookMarkIcon"></fa-icon></button>
         </div>
         <div class="content">
           <div class="desc-div">
-            <p>{{this.weatherData.isDay? 'Dia' : 'Noite'}}, {{this.weatherData.desc}}.</p>
+            <p>{{this.weatherData.isDay ? 'Dia' : 'Noite'}}, {{this.weatherData.desc}}.</p>
           </div>
           <div class="content-principal">
             <h1>{{weatherData.temp}}º</h1>
@@ -47,9 +82,20 @@
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="api-desc-div">
-      <p>© 2012 — 2022 OpenWeather API ®</p>
+  <div class="musicplayerDiv">
+    <div class="musicplayerDivMax">
+      <audio #musicplayer loop>
+        <source src="../assets/climafodaradio/diaclimafoda.wav" type="audio/wav">
+      </audio>
+      <button (click)="musicplayerPlay()"><fa-icon [icon]="mediaplayerPlayIcon"></fa-icon></button>
+      <div class="timeDisplayDivMax"><p>{{htmlElapseLengthAudio}}</p></div>
+      <input class="musicPlayerDivRange" #musicplayerRange type="range" min="0" max="{{musicplayerDuration}}" (change)="musicplayerRangeF()">
+      <p>-{{this.htmlFullLengthAudio}}</p>
+      <button (click)="volumeF()"><fa-icon [icon]="this.iconVolume"></fa-icon></button>
     </div>
   </div>
+
+</div>
 </body>
